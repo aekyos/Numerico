@@ -1,9 +1,6 @@
 ###########################Ejercicio 1)
 using LinearAlgebra
 
-#A=[[1 8 3];[4 5 6];[7 8 9]]
-#b=[1,5,9]
-
 function sol_tr_sup(A, b)
     if det(A)==0
         println("ERROR: LA MATRIZ ES SINGULAR")
@@ -45,25 +42,23 @@ end
 ###########################Ejercicio 2)a)
 function egauss(A,b)
     n = size(A,2)
-    U = copy(A)
-    y = copy(b)
     
-    for k=1 : n-1
-        for i=k+1 : n
+    for k=1 : (n-1)
+        for i=(k+1) : n
             if (A[k,k] == 0)
                 println("La matriz ya es singular")
                 break
             end
             
             z = A[i,k]/A[k,k]
-            for j=k+1 : n
-                U[i,j] = A[i,j] / (z*A[k,j])
+            for j=k : n
+                A[i,j] = A[i,j] - (z*A[k,j])
             end
-            y[i] = b[i] - z*b[k]
+            b[i] = b[i] - (z*b[k])
         end
     end
     
-    return [U,y]
+    return [A,b]
 end
 
 ###########################Ejercicio 2)b)
@@ -78,7 +73,6 @@ function sol_eg(A,b)
 end
 
 ###########################Ejercicio 3)
-using LinearAlgebra
 function sol_lu(A, b)
     L,U,p = lu(A)
     
@@ -123,7 +117,7 @@ function gseidel(A,b,err, mit)
     x = zeros(n)
     
     k = 1 
-    while k <= mit
+    while (k <= mit)
         for i=1 :n
             aux = 0
             for j=1 : n
@@ -150,7 +144,7 @@ function ej6_a()
     
     gs = gseidel(A,b,1e-11,100)
     j = jacobi(A,b,1e-11,100)
-    
+		
     println(gs)
     println(j)
 end
