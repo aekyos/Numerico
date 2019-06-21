@@ -116,13 +116,15 @@ function f_ej4a(x)
     return f
 end
 
-function ej4a(x)
-    real = 0,264241                                     #valor real la integral               
-    i = 1
-    a = inte_num_comp(f_ej2,0,1,1,"simpson")
-    while ((real-a) < 0.0001)                           #MIENTRAS NO SE CUMPLA EL ERROR
-        a = inte_num_comp(f_ej2,0,1,i,"simpson")        #CALCULO LA INTEGRAL CON i INTERVALOS   
-        i = i+1                                         #AUMENTO EN UNO LA CANTIDAD DE INTERVALOS
+function ej4a()
+    real = 0.264241                                     #valor real la integral               
+    i = 2
+    a = inte_num_comp(f_ej2,0,1,i,"simpson")
+    error = abs(real-a)
+    while (error > 0.0001)                              #MIENTRAS NO SE CUMPLA EL ERROR
+        a = inte_num_comp(f_ej4a,0,1,i,"simpson")       #CALCULO LA INTEGRAL CON i INTERVALOS   
+        i = i+2                                         #AUMENTO EN DOS LA CANTIDAD DE INTERVALOS PORQUE EN SIMPSON NO PUEDE SER IMPAR
+        error = abs(real-a)                             #CALCULO EL ERROR
     end
     
     return a
