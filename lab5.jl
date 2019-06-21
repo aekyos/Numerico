@@ -97,17 +97,18 @@ end
 
 function ej3(x)
     y = []
-    real = []
-    
+        
     for j=1 : length(x)
         append!(y,senint(j))                            #CALCULO senint(xi)
-        append!(real, sin(j))                           #CALCULO sen(xi)
     end 
     
-    #return y                                           #DEVUELVO LA INTEGRAL DE TODOS LOS XI QUE ME PASARON
-    
-    plot(x,integral,linewidth=2,title="My Plot")        #GRAFICO SENINT(x)
-    plot!(x,real)                                       #GRAFICO SEN(x)
+    return y                                           #DEVUELVO LA INTEGRAL DE TODOS LOS XI QUE ME PASARON
+end
+
+function ej3_plot()
+    x = 0:0.5:(2*pi)
+    plot(x,senint,linewidth=2,label="senint")                #GRAFICO SENINT(x)
+    plot!(x,sin,label="sen")                                       #GRAFICO SEN(x)
 end
 
 ###########################Ejercicio 4)a)
@@ -119,7 +120,7 @@ end
 function ej4a()
     real = 0.264241                                     #valor real la integral               
     i = 2
-    a = inte_num_comp(f_ej4,0,1,i,"simpson")
+    a = inte_num_comp(f_ej4a,0,1,i,"simpson")
     error = abs(real-a)
     while (error > 0.0001)                              #MIENTRAS NO SE CUMPLA EL ERROR
         a = inte_num_comp(f_ej4a,0,1,i,"simpson")       #CALCULO LA INTEGRAL CON i INTERVALOS   
