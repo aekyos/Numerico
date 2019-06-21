@@ -119,7 +119,7 @@ end
 function ej4a()
     real = 0.264241                                     #valor real la integral               
     i = 2
-    a = inte_num_comp(f_ej2,0,1,i,"simpson")
+    a = inte_num_comp(f_ej4,0,1,i,"simpson")
     error = abs(real-a)
     while (error > 0.0001)                              #MIENTRAS NO SE CUMPLA EL ERROR
         a = inte_num_comp(f_ej4a,0,1,i,"simpson")       #CALCULO LA INTEGRAL CON i INTERVALOS   
